@@ -1,0 +1,20 @@
+---
+services:
+  qgis:
+    image: qgis
+    container_name: qgis
+    security_opt:
+      - seccomp:unconfined #optional
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Etc/UTC
+      - PASSWORD=test123 #optional
+        #- CLI_ARGS= #optional
+    volumes:
+      - /home/dani/code/tst/tst_config:/config
+    ports:
+      - 8080:8080
+      - 8181:8181
+      - 8081:8081
+    restart: unless-stopped
