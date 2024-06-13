@@ -13,6 +13,7 @@ services:
         #- CLI_ARGS= #optional
     volumes:
       - /home/dani/code/qgis-kasmvnc/tst_config:/config:z
+      - /home/dani/Desktop:/host:z
     ports:
       - 8080:8080
       - 8181:8181

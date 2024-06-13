@@ -28,14 +28,28 @@ RUN \
     software-properties-common \
     wget && \
   echo "**** install QGIS ****" && \
-  wget -qO - https://qgis.org/downloads/qgis-2020.gpg.key | \
-    sudo gpg --no-default-keyring --keyring gnupg-ring:/etc/apt/trusted.gpg.d/qgis-archive.gpg \
-    --import && \
-  chmod a+r /etc/apt/trusted.gpg.d/qgis-archive.gpg && \
-  apt update && \
-  apt install -y qgis qgis-plugin-grass && \
+  wget -O /etc/apt/keyrings/qgis-archive-keyring.gpg \
+	https://download.qgis.org/downloads/qgis-archive-keyring.gpg && \
+  echo "Types: deb deb-src" > /etc/apt/sources.list.d/qgis.sources && \
+  echo "URIs: https://qgis.org/ubuntu" >> /etc/apt/sources.list.d/qgis.sources && \
+  echo "Suites: jammy" >> /etc/apt/sources.list.d/qgis.sources && \
+  echo "Architectures: amd64" >> /etc/apt/sources.list.d/qgis.sources && \
+  echo "Components: main" >> /etc/apt/sources.list.d/qgis.sources && \
+  echo "Signed-By: /etc/apt/keyrings/qgis-archive-keyring.gpg" >> /etc/apt/sources.list.d/qgis.sources && \
   echo "**** cleanup ****" && \
-  apt-get clean && \
+  apt update && \
+  apt install -y \
+	python3-pip \
+	python3-qgis \
+	python3-qgis-common \
+	python3-venv \
+     	python3-pytest \
+	python3-mock \
+	qgis \
+	qgis-plugin-grass \
+	qttools5-dev-tools \
+	xvfb && \
+  apt clean && \
   rm -rf \
     /tmp/* \
     /var/lib/apt/lists/* \
