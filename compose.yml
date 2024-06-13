@@ -9,10 +9,10 @@ services:
       - PUID=1000
       - PGID=1000
       - TZ=Etc/UTC
-      - PASSWORD=test123 #optional
+      - PASSWORD=test123 #optional (user `abc`)
         #- CLI_ARGS= #optional
     volumes:
-      - /home/dani/code/tst/tst_config:/config
+      - /home/dani/code/qgis-kasmvnc/tst_config:/config:z
     ports:
       - 8080:8080
       - 8181:8181
